@@ -27,14 +27,11 @@ steps:
     command: 'build'
     projects: '**/*.csproj'
 
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '**/*.csproj'
+    projects: '**.*/csproj'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/**/*LearnerFunctions.zip'
     arguments: '--no-restore --configuration Release -p:PublishDir=$(Build.ArtifactStagingDirectory)'
-
-
-
 
