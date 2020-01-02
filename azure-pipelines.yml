@@ -33,7 +33,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/*.csproj'
-    arguments: '--no-restore --configuration Release --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--no-restore --configuration Release -p:PublishDir=$(Build.ArtifactStagingDirectory)'
 
 
 
