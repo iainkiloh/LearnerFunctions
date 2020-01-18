@@ -1,5 +1,8 @@
 ﻿namespace LearnerFunctions.Contracts
 {
+    /// <summary>
+    /// class represent a customer order
+    /// </summary>
     public class Order
     {
         public string OrderId { get; set; }
