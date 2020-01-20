@@ -18,7 +18,8 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'Any CPU'#
+  buildConfiguration: 'Release'
 
 steps:
 
@@ -26,13 +27,19 @@ steps:
     If ("$(Build.SourceBranch)" -eq "refs/heads/development") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
     }
-    If ("$(Build.SourceBranch)" -eq "refs/heads/master") {
+    If ("$(Build.SourceBranch)" -contains "refs/heads/feature/") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
-    } 
+    }
+    If ("$(Build.SourceBranch)" -eq "refs/heads/master") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
+    }
+    If ("$(Build.SourceBranch)" -contains "refs/heads/hotfix/") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
+    }
     If ("$(Build.SourceBranch)" -contains "refs/heads/release-") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Staging"
     }
-
+    
 - script: | 
     echo building configuration $(buildConfiguration)
 
