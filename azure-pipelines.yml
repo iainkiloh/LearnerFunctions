@@ -56,7 +56,7 @@ steps:
     artifactName: 'drop_live'
 
 - task: PublishBuildArtifacts@1
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release-*'))
+  condition: and(succeeded(), contains(variables['Build.SourceBranch'], 'refs/heads/release-'))
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
     artifactName: 'drop_staging'
