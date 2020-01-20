@@ -18,10 +18,31 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'Any CPU'#
   buildConfiguration: 'Release'
 
 steps:
+
+- pwsh: |
+    If ("$(Build.SourceBranch)" -eq "refs/heads/development") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
+    }
+    If ("$(Build.SourceBranch)" -like "refs/heads/feature/*") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
+    }
+    If ("$(Build.SourceBranch)" -eq "refs/heads/master") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
+    }
+    If ("$(Build.SourceBranch)" -like "refs/heads/hotfix/*") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
+    }
+    If ("$(Build.SourceBranch)" -like "refs/heads/release-*") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Staging"
+    }
+    
+- script: | 
+    echo building configuration $(buildConfiguration)
+
 - task: NuGetToolInstaller@1
 
 - task: DotNetCoreCLI@2
@@ -37,7 +58,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
-    arguments: '--configuration Release --output publish_output'
+    arguments: '--configuration $(buildConfiguration) --output publish_output'
     projects: '*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
