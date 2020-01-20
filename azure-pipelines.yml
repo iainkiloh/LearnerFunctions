@@ -52,18 +52,19 @@ steps:
 - task: PublishBuildArtifacts@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
-    artifactName: 'drop_live'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/livebuild/build$(Build.BuildId).zip'
+    artifactName: 'droplive'
+
 - task: PublishBuildArtifacts@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release-*'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop_staging'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/staging/build$(Build.BuildId).zip'
+    artifactName: 'dropstaging'
 
 - task: PublishBuildArtifacts@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop_development'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/devbuild/build$(Build.BuildId).zip'
+    ArtifactName: 'dropdevelopment'
 
 
