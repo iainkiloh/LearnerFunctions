@@ -27,16 +27,16 @@ steps:
     If ("$(Build.SourceBranch)" -eq "refs/heads/development") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
     }
-    If ("$(Build.SourceBranch)" -contains "refs/heads/feature/") {
+    If (contains("$(Build.SourceBranch)", "refs/heads/feature/")) {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
     }
     If ("$(Build.SourceBranch)" -eq "refs/heads/master") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
     }
-    If ("$(Build.SourceBranch)" -contains "refs/heads/hotfix/") {
+    If (contains("$(Build.SourceBranch)", "refs/heads/hotfix/")) {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
     }
-    If ("$(Build.SourceBranch)" -contains "refs/heads/release-") {
+    If (contains("$(Build.SourceBranch)", "refs/heads/release-")) {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Staging"
     }
     
