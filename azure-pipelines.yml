@@ -10,6 +10,7 @@ trigger:
     - master
     - release-*
     - development
+    - feature/*
 
 pool:
   vmImage: 'windows-latest'
