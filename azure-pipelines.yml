@@ -25,10 +25,12 @@ steps:
 - pwsh: |
     If ("$(Build.SourceBranch)" -eq "refs/heads/development") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
+    }
+    If ("$(Build.SourceBranch)" -eq "refs/heads/master") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
     } 
-    else
-    {
-        Write-Host "##vso[task.setvariable variable=buildConfiguration;]Release"
+    If ("$(Build.SourceBranch)" -contains "refs/heads/release-") {
+      Write-Host "##vso[task.setvariable variable=buildConfiguration;]Staging"
     }
 
 - script: | 
