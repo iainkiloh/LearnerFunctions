@@ -23,7 +23,7 @@ variables:
 steps:
 
 - pwsh: |
-    If ("$(Build.SourceBranch)" -eq "refs/heads/develop") {
+    If ("$(Build.SourceBranch)" -eq "refs/heads/development") {
       Write-Host "##vso[task.setvariable variable=buildConfiguration;]Debug"
     } 
     else
