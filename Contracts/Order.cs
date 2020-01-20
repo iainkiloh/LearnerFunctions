@@ -1,7 +1,7 @@
 ﻿namespace LearnerFunctions.Contracts
 {
     /// <summary>
-    /// class represent a customer order
+    /// class to represent a customer order
     /// </summary>
     public class Order
     {
