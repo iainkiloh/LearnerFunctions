@@ -1,5 +1,8 @@
 ﻿namespace LearnerFunctions.TableStorageClasses
 {
+    /// <summary>
+    /// class for storing order data in table storage
+    /// </summary>
     public class OrderStorage : TableStorageBase
     {
         
